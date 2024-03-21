@@ -40,7 +40,7 @@ class DBStorage:
             for elem in query:
                 key = "{}.{}".format(type(elem).__name__, elem.id)
                 dictionary[key] = elem
-        lista = [City, State, User, Place, Amenity]
+        lista = [City, State, User, Place, Review, Amenity]
         for clas in lista:
             query = self.__session.query(clas)
             for elem in query:

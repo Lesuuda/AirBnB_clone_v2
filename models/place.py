@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 import models
 import shlex
+from models.review import Review
 from os import getenv
 from sqlalchemy import Column, Integer, Float, String, ForeignKey
 
@@ -20,13 +21,13 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    """
     if getenv("HBNB_TYPE_STORAGE") == "db":
         reviews = relationship("Review", cascade='all, delete, delete-orphan',
                                backref="place")
     else:
         @property
         def reviews(self):
+            """returns the list of reviews"""
             var = models.storage.all()
             lista = []
             result = []
@@ -39,5 +40,4 @@ class Place(BaseModel, Base):
                 if (elem.place_id == self.id):
                     result.append(elem)
             return (result)
-    """
 
