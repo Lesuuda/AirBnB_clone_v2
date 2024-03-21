@@ -40,13 +40,13 @@ class DBStorage:
             for elem in query:
                 key = "{}.{}".format(type(elem).__name__, elem.id)
                 dictionary[key] = elem
-        lista = [State ,City, User, Place, Review, Amenity]
+        lista = [City, State, User, Place, Amenity]
         for clas in lista:
             query = self.__session.query(clas)
             for elem in query:
                 key = "{}.{}".format(type(elem).__name__, elem.id)
                 dictionary[key] = elem
-            return dictionary
+        return dictionary
         
     def new(self, obj):
         """add a new element in the table

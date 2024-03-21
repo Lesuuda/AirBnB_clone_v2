@@ -20,17 +20,13 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
+    """
     if getenv("HBNB_TYPE_STORAGE") == "db":
         reviews = relationship("Review", cascade='all, delete, delete-orphan',
                                backref="place")
-
-        amenities = relationship("Amenity", secondary=place_amenity,
-                                 viewonly=False,
-                                 back_populates="place_amenities")
     else:
         @property
         def reviews(self):
-            """ Returns list of reviews.id """
             var = models.storage.all()
             lista = []
             result = []
@@ -43,4 +39,5 @@ class Place(BaseModel, Base):
                 if (elem.place_id == self.id):
                     result.append(elem)
             return (result)
+    """
 
