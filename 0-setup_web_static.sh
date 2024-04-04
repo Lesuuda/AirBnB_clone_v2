@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
-# sets up your web servers for the deployment of web_static
+# Sets up a web server for deployment of web_static.
+
 apt-get update
-apt-get install nginx -y
-mkdir -p data/web_static/releases/test
-mkdir -p data/web_static/shared/
-echo "Your Nginx server" >> data/web_static/releases/test/index.html
-ln -sf data/web_static/releases/test/ data/web_static/current
-chown -R ubuntu data/
-chgrp -R ubuntu data/
+apt-get install -y nginx
+
+mkdir -p /data/web_static/releases/test/
+mkdir -p /data/web_static/shared/
+echo "Holberton School" > /data/web_static/releases/test/index.html
+ln -sf /data/web_static/releases/test/ /data/web_static/current
+
+chown -R ubuntu /data/
+chgrp -R ubuntu /data/
 
 printf %s "server {
     listen 80 default_server;
