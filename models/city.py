@@ -14,3 +14,9 @@ class City(BaseModel, Base):
     name = Column(String(128), nullable=False)
     places = relationship("Place", cascade='all, delete, delete-orphan',
                           backref="cities")
+
+    def __iter__(self):
+        """ Returns the dictionary with the city information """
+        yield 'state_id', self.state_id
+        yield 'name', self.name
+        yield 'places', self.places
