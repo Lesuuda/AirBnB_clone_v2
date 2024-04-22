@@ -7,12 +7,17 @@ import models
 import shlex
 
 
-
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
-    cities = relationship("City", backref=backref("state", cascade="all, delete, delete-orphan"))
+    cities = relationship(
+        "City",
+        backref=backref(
+            "state",
+            cascade="all, delete, delete-orphan"
+        )
+    )
 
     @property
     def cities(self):
@@ -28,7 +33,3 @@ class State(BaseModel, Base):
             if element.state_id == self.id:
                 result.append(element)
         return (element)
-
-
-
-
