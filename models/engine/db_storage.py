@@ -24,8 +24,7 @@ class DBStorage:
         host = getenv("HBNB_MYSQL_HOST")
         database = getenv("HBNB_MYSQL_DB")
         env = getenv("HBNB_ENV")
-        self.__engine = (create_engine('mysql+mysqldb://{}:{}@{}/{}'.format
-                                (user, password, host, database, pool_pre_ping=True)))
+        self.__engine = (create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(user, password, host, database, pool_pre_ping=True)))
 
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
@@ -80,7 +79,4 @@ class DBStorage:
         closes the current session
         """
         self.__session.close()
-
-    def close(self):
-        """call remove() method on the private session attribute"""
         self.__session.remove()
