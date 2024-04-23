@@ -1,11 +1,5 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel, Base
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
 import json
 from os import getenv
 from sqlalchemy import create_engine
@@ -65,14 +59,23 @@ class DBStorage:
         """delete an element in the table
         """
         if obj:
-            self.session.delete(obj)
+            self.__session.delete(obj)
 
     def reload(self):
         """
         creates the database
         """
-        Base.metadata.create_all(self.__engine)
-        sess = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+        try:
+            Base.metadata.create_all(self.__engine)
+        except Exception as e:
+            print(e)
+        sess = sessionmaker(bind=self.__engine)
         Session = scoped_session(sess)
         self.__session = Session()
 
